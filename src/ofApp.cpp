@@ -75,15 +75,19 @@ void ofApp::draw(){
 		}
 	}
 	fbo.end();
+  
+  if (debug) {
 	// ofSetColor(255, 255, 255, 255);
 	// shadow.draw(0, 0, 640, 480);
-	ofSetColor(255, 255, 255, 255);
-	img.draw(0, 0, 640, 480);
-	ofSetColor(255, 255, 255, 255);
-  if (!debug) return;
-  
-	fbo.draw(0, 0, 640, 480);
-  fbo.draw(660, 0, 640, 480);
+    ofSetColor(255, 255, 255, 255);
+    img.draw(0, 0, 640, 480);
+    fbo.draw(0, 0, 640, 480);
+    fbo.draw(660, 0, 640, 480);
+    return;
+  }
+  ofSetColor(255, 255, 255, 255);
+  img.draw(0, 0, 800, 600);
+  fbo.draw(0, 0, 800, 600);
 }
 
 //--------------------------------------------------------------
