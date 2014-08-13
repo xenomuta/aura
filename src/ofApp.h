@@ -24,4 +24,5 @@ class ofApp : public ofBaseApp{
 		ofVideoGrabber cam;
 		ofxCvHaarFinder finder;
 		ofFbo fbo;
+    bool debug;
 };

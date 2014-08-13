@@ -1,3 +1,4 @@
 bin/eyePower
 bin/libs
 obj
+bin/*.app

@@ -1,1 +1,4 @@
+ofxGui
 ofxOpenCv
+ofxAxisGrabber
+ofxHttpUtils
