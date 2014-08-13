@@ -29,33 +29,36 @@ void ofApp::draw(){
 	// ofBackground(80, 80, 80, 255);
     ofEnableAlphaBlending();
     ofEnableSmoothing();
+	// ofNoFill();
+	// ofSetLineWidth(2);
 	ofFill();
 
 	fbo.begin();
     ofEnableAlphaBlending();
-	ofSetColor(255, 255, 255, 16);
-	fbo.draw(20 - (cos(ofGetFrameNum() / 4) * 40), -abs(cos(ofGetFrameNum() / 4) * 10));
+	ofSetColor(255, 255, 255, 32);
+	fbo.draw(20 - (cos(ofGetFrameNum() / 4) * 40), -ofRandom(2, 5));
 	float h = fmodf(ofGetElapsedTimef()*10, 255);
 	float s = 255;
 	float v = 255 * cos(ofGetFrameNum() / 10);
 
 	ofColor cc = ofColor::fromHsb(255 - h, 200, 128);
-	ofSetColor(255 - (int)cc.r, 255 - (int)cc.g, 255 - (int)cc.b, ofRandom(16, 64));
+	ofSetColor(255 - (int)cc.r, 255 - (int)cc.g, 255 - (int)cc.b, ofRandom(16, 32));
 	shadow.draw(2 - (cos(ofGetFrameNum() / 4) * 4), -ofRandom(2, 5));
 	for (unsigned int i = 0; i < finder.blobs.size(); i++) {
 		ofxCvBlob b = finder.blobs[i];
-		ofPoint p = b.centroid;
 		ofRectangle r = b.boundingRect;
-		int a = (r.width + r.height) / 3;
+		//ofPoint p = b.centroid;
+		ofPoint p = ofPoint(r.x, r.y);
+		// int a = (r.width + r.height) / 3;
+		int a = ofRandom(10, 50);
 
-		h = fmodf((ofGetElapsedTimef() + (i * 1000)) * 30, 255);
+		h = fmodf((ofGetElapsedTimef() + (i * 1000)) * 10, 255);
 		cc = ofColor::fromHsb(h, s, 255);
-		for (int s = 1; s < 5; s++) {
-			int aa = ofRandom(16, 48);
-			ofSetColor((int)cc.r, (int)cc.g, (int)cc.b, aa - (aa / s));
-			ofCircle(p.x, p.y, a + (ofRandom(5, 9) * s));
-			ofCircle(p.x - (r.width / 2), p.y + (r.height * 1.5), a + (ofRandom(7, 12) * s));
-			ofCircle(p.x + (r.width / 2), p.y + (r.height * 1.5), a + (ofRandom(7, 12) * s));
+		ofSetColor((int)cc.r, (int)cc.g, (int)cc.b, ofRandom(32, 48));
+		for (int j = 0; j < ofRandom(5, 50); j++) {
+			ofCircle(ofRandom(p.x, p.x + r.width), ofRandom(p.y, p.y + r.height), a);
+			ofCircle(ofRandom(p.x, p.x + r.width) - (r.width / 2), ofRandom(p.y, p.y + r.height) + (r.height * 1.5), a);
+			ofCircle(ofRandom(p.x, p.x + r.width) + (r.width / 2), ofRandom(p.y, p.y + r.height) + (r.height * 1.5), a);
 		}
 	}
 	fbo.end();
